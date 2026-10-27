@@ -27,7 +27,7 @@
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px">
       <div style="flex:1 1 520px;display:flex;flex-direction:column;gap:22px">
         <span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#3E5446;font-weight:600">Kuhinje po meri</span>
-        <h1 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(44px,6vw,76px);line-height:1.18;letter-spacing:-.025em;text-wrap:balance">Kuhinja projektovana <span style="white-space:nowrap">prema tome <em style="color:#6B4A2F">kako vi</em></span> <em style="color:#6B4A2F">kuvate.</em></h1>
+        <h1 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(44px,6vw,76px);line-height:1.18;letter-spacing:-.025em;text-wrap:balance">Kuhinja projektovana <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="white-space:nowrap">prema tome <em style="color:#6B4A2F">kako vi</em></span> <em style="color:#6B4A2F">kuvate.</em></sc-if><sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">prema tome <em style="color:#6B4A2F">kako</em> <em style="color:#6B4A2F;white-space:nowrap">vi kuvate.</em></sc-if></h1>
       </div>
       <div style="flex:0 1 380px;display:flex;flex-direction:column;gap:20px">
         <p lang="hr" style="margin:0;font-size:18px;line-height:1.55;color:#4E4034;text-align:justify;hyphens:manual;-webkit-hyphens:manual">Svaku kuhinju crtamo za konkretan prostor, od rasporeda elemenata do poslednje fioke. Radimo je od kvalitetnog drveta i ploča, sa okovima koji traju.</p>
@@ -114,5 +114,14 @@
   <dc-import name="footer" book="Kuhinja" hint-size="100%,760px"></dc-import>
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { narrow: typeof window !== 'undefined' && window.innerWidth < 700 };
+  onResize = () => { const n = window.innerWidth < 700; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+  componentDidMount() { window.addEventListener('resize', this.onResize); this.onResize(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  renderVals() { return { narrow: this.state.narrow, wide: !this.state.narrow }; }
+}
+</script>
 </body>
 </html>
