@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Hanken+Grotesk:wght@500;600&display=swap">
+<style>
+html,body,#map{margin:0;height:100%;background:#EFE8DC}
+.leaflet-tile-pane{filter:grayscale(1) sepia(.35) contrast(.92) brightness(1.04)}
+.leaflet-container{font-family:'Hanken Grotesk',sans-serif}
+.leaflet-control-attribution{background:rgba(244,238,228,.85)!important;color:#6B5A4A!important;font-size:10px}
+.leaflet-control-attribution a{color:#6B4A2F!important}
+.leaflet-bar a{background:#F4EEE4;color:#2A211A;border-color:rgba(42,33,26,.15)}
+.leaflet-bar{border:1px solid rgba(42,33,26,.2)!important;border-radius:2px!important;box-shadow:none!important}
+.pin{display:flex;flex-direction:column;align-items:center}
+.pin-label{background:#2A211A;color:#F4EEE4;padding:8px 12px;border-radius:2px;white-space:nowrap;display:flex;flex-direction:column;gap:2px;box-shadow:0 6px 16px rgba(42,33,26,.25)}
+.pin-label b{font-family:'Newsreader',serif;font-weight:400;font-size:17px;line-height:1}
+.pin-label span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D9CBB6;font-weight:600}
+.pin-stem{width:2px;height:14px;background:#2A211A}
+.pin-dot{width:12px;height:12px;border-radius:50%;background:#6B4A2F;border:2px solid #F4EEE4;box-shadow:0 0 0 1px #2A211A}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+const LOC = [44.0142, 20.9116];
+const map = L.map('map', { center: [LOC[0] + 0.0025, LOC[1]], zoom: 14, scrollWheelZoom: false, zoomControl: true });
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap contributors' }).addTo(map);
+L.marker(LOC, { icon: L.divIcon({ className: '', iconSize: [0, 0], iconAnchor: [0, 0],
+  html: '<div class="pin" style="transform:translate(-50%,calc(-100% + 6px))"><div class="pin-label"><span>Radionica</span><b>Eucalyptus</b></div><div class="pin-stem"></div><div class="pin-dot"></div></div>' }) }).addTo(map);
+</script>
+</body>
+</html>

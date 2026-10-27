@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kontakt i zakazivanje procene · Eucalyptus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<script src="./image-slot.js"></script>
+<style>*{box-sizing:border-box}body{margin:0;background:#F4EEE4;color:#2A211A;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{opacity:.75}input,textarea,button{font:inherit}input::placeholder,textarea::placeholder{color:#2A211A;opacity:.45}</style>
+<script src="glow.js"></script>
+</helmet>
+<div data-screen-label="Kontakt" style="position:relative;background:#F4EEE4;color:#2A211A;font-family:'Hanken Grotesk',sans-serif">
+  <dc-import name="header" style="position:sticky;top:0;z-index:40" active="" hint-size="100%,88px"></dc-import>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,4.6vw,56px) 0;display:flex;flex-wrap:wrap;gap:clamp(40px,5vw,72px);align-items:flex-start">
+    <div style="flex:1 1 340px;display:flex;flex-direction:column;gap:24px">
+      <span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#3E5446;font-weight:600">Kontakt</span>
+      <h1 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(48px,6.4vw,80px);line-height:.98;letter-spacing:-.025em">Zakaži <em style="color:#6B4A2F">procenu.</em></h1>
+      <p style="margin:0;font-size:18px;line-height:1.55;color:#4E4034;max-width:460px">Recite nam šta planirate. Javićemo se<br>da dogovorimo dolazak. Za obnovu je<br>dovoljno da pošaljete fotografiju komada.</p>
+      <div style="display:flex;flex-direction:column;font-size:16px;margin-top:8px">
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(42,33,26,.18)"><span style="color:#6B5A4A">Telefon</span><span style="font-weight:600">+381 34 000 000</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(42,33,26,.18)"><span style="color:#6B5A4A">E-pošta</span><span style="font-weight:600">info@eucalyptus.rs</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(42,33,26,.18)"><span style="color:#6B5A4A">Adresa</span><span style="font-weight:600">Kragujevac</span></div>
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(42,33,26,.18);border-bottom:1px solid rgba(42,33,26,.18)"><span style="color:#6B5A4A">Radno vreme</span><span style="font-weight:600;text-align:right">pon–pet 8–16 · sub 8–13</span></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a href="viber://chat?number=%2B38134000000" style="display:flex;align-items:center;gap:10px;background:#2A211A;color:#F4EEE4;padding:15px 22px;border-radius:999px;font-weight:500"><span style="width:18px;height:18px;flex:none;background:#9B8AFB;-webkit-mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/viber.svg) center/contain no-repeat;mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/viber.svg) center/contain no-repeat"></span>Pišite na Viber</a>
+        <a href="https://wa.me/38134000000" target="_blank" style="display:flex;align-items:center;gap:10px;background:#2A211A;color:#F4EEE4;padding:15px 22px;border-radius:999px;font-weight:500"><span style="width:18px;height:18px;flex:none;background:#3DDC84;-webkit-mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/whatsapp.svg) center/contain no-repeat;mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/whatsapp.svg) center/contain no-repeat"></span>Pišite na WhatsApp</a>
+      </div>
+      <div style="height:240px;margin-top:8px;border:1px solid rgba(42,33,26,.18);border-radius:4px;overflow:hidden"><iframe src="mapa.html" title="Mapa — lokacija radionice u Kragujevcu" loading="lazy" style="display:block;width:100%;height:100%;border:0"></iframe></div>
+    </div>
+
+    <div id="zakazivanje" style="flex:1.2 1 420px;background:#FBF8F2;border:1px solid rgba(42,33,26,.14);border-radius:4px;padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:28px;scroll-margin-top:24px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6B5A4A"><span>Zakazivanje procene</span><span>{{ stepLabel }}</span></div>
+        <div style="height:2px;background:rgba(42,33,26,.12)"><div style="height:2px;background:#6B4A2F;width:{{ progress }};transition:width .3s"></div></div>
+      </div>
+      <sc-if value="{{ s0 }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(28px,3vw,34px)">Šta želite da napravimo?</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px">
+            <sc-for list="{{ types }}" as="o" hint-placeholder-count="6"><button onClick="{{ o.pick }}" style="text-align:left;padding:18px 20px;border-radius:2px;cursor:pointer;font-size:16px;font-weight:500;min-height:56px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }}">{{ o.label }}</button></sc-for>
+          </div>
+          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#9A3B22;font-weight:500">{{ err }}</span></sc-if>
+          <button onClick="{{ next }}" style="align-self:flex-start;background:#2A211A;color:#F4EEE4;border:0;padding:16px 28px;border-radius:2px;font-weight:600;cursor:pointer">Dalje →</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px;color:#6B5A4A"><span>Izabrano:</span><strong style="color:#2A211A;font-weight:600">{{ type }}</strong><button onClick="{{ back }}" style="background:transparent;border:0;border-bottom:1px solid #6B4A2F;color:#6B4A2F;padding:0 0 1px;font-size:14px;cursor:pointer">promenite</button></div>
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(28px,3vw,34px)">{{ s1Title }}</h2>
+          <input value="{{ city }}" onChange="{{ setCity }}" placeholder="Grad ili mesto" style="background:transparent;border:0;border-bottom:1px solid {{ cityBd }};padding:12px 0;font-size:17px;color:#2A211A;outline:none;width:100%">
+          <input value="{{ dims }}" onChange="{{ setDims }}" placeholder="{{ dimPlaceholder }}" style="background:transparent;border:0;border-bottom:1px solid rgba(42,33,26,.3);padding:12px 0;font-size:17px;color:#2A211A;outline:none;width:100%">
+          <label style="display:flex;align-items:center;justify-content:center;gap:10px;border:1px dashed rgba(42,33,26,.4);border-radius:2px;padding:22px;font-size:15px;color:#4E4034;cursor:pointer;text-align:center">{{ fileLabel }}<input type="file" accept="image/*" multiple onChange="{{ setFiles }}" style="display:none"></label>
+          <span style="font-size:14px;color:#6B5A4A;margin-top:6px">Kada vam treba?</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ whens }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="padding:10px 16px;border-radius:2px;cursor:pointer;font-size:15px;min-height:44px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }}">{{ o.label }}</button></sc-for>
+          </div>
+          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#9A3B22;font-weight:500">{{ err }}</span></sc-if>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px"><button onClick="{{ back }}" style="background:transparent;border:1px solid #2A211A;color:#2A211A;padding:15px 24px;border-radius:2px;font-weight:500;cursor:pointer">Nazad</button><button onClick="{{ next }}" style="background:#2A211A;color:#F4EEE4;border:0;padding:16px 28px;border-radius:2px;font-weight:600;cursor:pointer">Dalje →</button></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(28px,3vw,34px)">Izaberite termin procene</h2>
+          <span style="font-size:14px;color:#6B5A4A">Dan</span>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px">
+            <sc-for list="{{ days }}" as="d" hint-placeholder-count="12"><button onClick="{{ d.pick }}" style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:2px;cursor:pointer;min-height:64px;background:{{ d.bg }};color:{{ d.fg }};border:1px solid {{ d.bd }}"><span style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase">{{ d.dow }}</span><span style="font-family:'Newsreader',serif;font-size:22px;line-height:1.1">{{ d.num }}</span><span style="font-size:12px">{{ d.mon }}</span></button></sc-for>
+          </div>
+          <span style="font-size:14px;color:#6B5A4A;margin-top:6px">Vreme dolaska</span>
+          <sc-if value="{{ noDay }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;color:#6B5A4A">Prvo izaberite dan.</span></sc-if>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px">
+            <sc-for list="{{ times }}" as="t" hint-placeholder-count="0"><button onClick="{{ t.pick }}" style="padding:12px 10px;border-radius:2px;cursor:pointer;font-size:16px;font-weight:500;min-height:48px;background:{{ t.bg }};color:{{ t.fg }};border:1px solid {{ t.bd }}">{{ t.label }}</button></sc-for>
+          </div>
+          <span style="font-size:14px;line-height:1.5;color:#6B5A4A">Procena je besplatna i traje oko sat vremena. Termin potvrđujemo telefonom.</span>
+          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#9A3B22;font-weight:500">{{ err }}</span></sc-if>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px"><button onClick="{{ back }}" style="background:transparent;border:1px solid #2A211A;color:#2A211A;padding:15px 24px;border-radius:2px;font-weight:500;cursor:pointer">Nazad</button><button onClick="{{ next }}" style="background:#2A211A;color:#F4EEE4;border:0;padding:16px 28px;border-radius:2px;font-weight:600;cursor:pointer">Dalje →</button></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(28px,3vw,34px)">Kako da vas kontaktiramo?</h2>
+          <input value="{{ name }}" onChange="{{ setName }}" placeholder="Ime i prezime" autocomplete="name" style="background:transparent;border:0;border-bottom:1px solid {{ nameBd }};padding:12px 0;font-size:17px;color:#2A211A;outline:none;width:100%">
+          <input value="{{ phone }}" onChange="{{ setPhone }}" placeholder="Telefon" type="tel" autocomplete="tel" style="background:transparent;border:0;border-bottom:1px solid {{ phoneBd }};padding:12px 0;font-size:17px;color:#2A211A;outline:none;width:100%">
+          <textarea value="{{ note }}" onChange="{{ setNote }}" placeholder="Napomena (opciono)" rows="2" style="background:transparent;border:0;border-bottom:1px solid rgba(42,33,26,.3);padding:12px 0;font-size:17px;color:#2A211A;outline:none;width:100%;resize:none"></textarea>
+          <div style="display:flex;flex-direction:column;font-size:15px;margin-top:4px">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(42,33,26,.15)"><span style="color:#6B5A4A">Posao</span><span style="font-weight:600;text-align:right">{{ type }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(42,33,26,.15)"><span style="color:#6B5A4A">Mesto</span><span style="font-weight:600;text-align:right">{{ city }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid rgba(42,33,26,.15);border-bottom:1px solid rgba(42,33,26,.15)"><span style="color:#6B5A4A">Termin</span><span style="font-weight:600;text-align:right">{{ termin }}</span></div>
+          </div>
+          <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#9A3B22;font-weight:500">{{ err }}</span></sc-if>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px"><button onClick="{{ back }}" style="background:transparent;border:1px solid #2A211A;color:#2A211A;padding:15px 24px;border-radius:2px;font-weight:500;cursor:pointer">Nazad</button><button onClick="{{ next }}" style="background:#2A211A;color:#F4EEE4;border:0;padding:16px 28px;border-radius:2px;font-weight:600;cursor:pointer">Zakaži procenu</button></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:16px;padding:24px 0">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(32px,3.4vw,40px)">Hvala, {{ firstName }}. Termin je rezervisan.</h2>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#4E4034">Procena: <strong style="color:#2A211A">{{ termin }}</strong>, {{ city }}. Pozvaćemo vas na {{ phone }} da potvrdimo dolazak.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px"><a href="index.html" style="background:#2A211A;color:#F4EEE4;border:0;padding:16px 28px;border-radius:2px;font-weight:600;cursor:pointer;text-decoration:none">Nazad na početnu</a><button onClick="{{ reset }}" style="background:transparent;border:1px solid #2A211A;color:#2A211A;padding:15px 24px;border-radius:2px;font-weight:500;cursor:pointer">Novi upit</button></div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(72px,10vw,120px) clamp(20px,4.6vw,56px)">
+    <h2 style="margin:0 0 36px;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(34px,4.4vw,48px);letter-spacing:-.02em;line-height:1">Šta se dešava posle upita</h2>
+    <div data-glow="light" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px 24px">
+      <div style="border-top:1px solid #2A211A;padding-top:20px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Newsreader',serif;font-style:italic;font-size:40px;line-height:1;color:#3E5446">01</span><h3 style="margin:0;font-size:18px;font-weight:600">Pozovemo vas</h3><p style="margin:0;font-size:15px;line-height:1.5;color:#4E4034">Razgovaramo o tome šta vam treba i dogovaramo termin.</p></div>
+      <div style="border-top:1px solid #2A211A;padding-top:20px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Newsreader',serif;font-style:italic;font-size:40px;line-height:1;color:#3E5446">02</span><h3 style="margin:0;font-size:18px;font-weight:600">Dolazimo na procenu</h3><p style="margin:0;font-size:15px;line-height:1.5;color:#4E4034">Merimo prostor ili pregledamo komad koji obnavljamo.</p></div>
+      <div style="border-top:1px solid #2A211A;padding-top:20px;display:flex;flex-direction:column;gap:12px"><span style="font-family:'Newsreader',serif;font-style:italic;font-size:40px;line-height:1;color:#3E5446">03</span><h3 style="margin:0;font-size:18px;font-weight:600">Projekat i ponuda</h3><p style="margin:0;font-size:15px;line-height:1.5;color:#4E4034">Dobijate rešenje, izbor materijala i jasnu cenu.</p></div>
+    </div>
+  </section>
+
+  <dc-import name="footer" hide-cta="{{ true }}" hint-size="100%,440px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TYPES = ['Kuhinja', 'Ormar', 'Vrata', 'Krevet', 'Prozori', 'Obnova starog nameštaja', 'Poslovni prostor'];
+const WHENS = ['Što pre', 'Za 1–3 meseca', 'Samo se raspitujem'];
+const PARAM = { Kuhinja: 'Kuhinja', Ormar: 'Ormar', Vrata: 'Vrata', Krevet: 'Krevet', Prozori: 'Prozori', Obnova: 'Obnova starog nameštaja', Poslovni: 'Poslovni prostor' };
+const DOW = ['ned', 'pon', 'uto', 'sre', 'čet', 'pet', 'sub'];
+const DOW_FULL = ['nedelja', 'ponedeljak', 'utorak', 'sreda', 'četvrtak', 'petak', 'subota'];
+const MON = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'];
+const MON_FULL = ['januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
+const slotsFor = d => d.getDay() === 6 ? ['08:00', '10:00', '12:00'] : ['08:00', '10:00', '12:00', '14:00'];
+function nextDays(n) {
+  const out = [], d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + 1);
+  while (out.length < n) { if (d.getDay() !== 0) out.push(new Date(d)); d.setDate(d.getDate() + 1); }
+  return out;
+}
+const INIT = { step: 0, type: '', city: '', dims: '', files: 0, when: '', day: -1, time: '', name: '', phone: '', note: '', err: '', tried: false };
+class Component extends DCLogic {
+  state = { ...INIT };
+  DAYS = nextDays(12);
+  componentDidMount() {
+    this.readHash();
+    this.onHash = () => this.readHash();
+    window.addEventListener('hashchange', this.onHash);
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.onHash); }
+  readHash() {
+    const hs = decodeURIComponent(window.location.hash || '');
+    if (!hs.startsWith('#zakazivanje')) return;
+    const t = hs.slice('#zakazivanje-'.length);
+    if (t && PARAM[t]) this.setState({ ...INIT, type: PARAM[t], step: 1 });
+    setTimeout(() => { const el = document.getElementById('zakazivanje'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 24, behavior: 'smooth' }); }, 120);
+  }
+  check(step) {
+    const s = this.state;
+    if (step === 0 && !s.type) return 'Izaberite šta želite da napravimo.';
+    if (step === 1 && !s.city.trim()) return 'Upišite grad ili mesto.';
+    if (step === 2 && (s.day < 0 || !s.time)) return 'Izaberite dan i vreme procene.';
+    if (step === 3 && !s.name.trim()) return 'Upišite ime i prezime.';
+    if (step === 3 && s.phone.replace(/\D/g, '').length < 6) return 'Upišite ispravan broj telefona.';
+    return '';
+  }
+  renderVals() {
+    const s = this.state, { step, type, when, day, time, tried } = s;
+    const num = Math.min(step + 1, 4);
+    const sel = on => ({ bg: on ? '#2A211A' : 'transparent', fg: on ? '#F4EEE4' : '#2A211A', bd: on ? '#2A211A' : 'rgba(42,33,26,.25)' });
+    const opts = (list, cur, key) => list.map(l => ({ label: l, pick: () => this.setState({ [key]: l, err: '' }), ...sel(cur === l) }));
+    const isObnova = type === 'Obnova starog nameštaja';
+    const d = day >= 0 ? this.DAYS[day] : null;
+    const field = key => e => this.setState({ [key]: e.target.value, err: '' });
+    const bad = (cond) => tried && cond ? '#9A3B22' : 'rgba(42,33,26,.3)';
+    return {
+      s0: step === 0, s1: step === 1, s2: step === 2, s3: step === 3, done: step === 4,
+      stepLabel: step >= 4 ? 'Poslato' : 'Korak ' + num + ' od 4',
+      progress: (step >= 4 ? 100 : (num / 4) * 100) + '%',
+      err: s.err,
+      next: () => { const e = this.check(step); if (e) this.setState({ err: e, tried: true }); else this.setState({ step: step + 1, err: '', tried: false }); },
+      back: () => this.setState({ step: Math.max(0, step - 1), err: '', tried: false }),
+      reset: () => this.setState({ ...INIT }),
+      types: opts(TYPES, type, 'type'),
+      whens: opts(WHENS, when, 'when'),
+      type, city: s.city, dims: s.dims, name: s.name, phone: s.phone, note: s.note,
+      setCity: field('city'), setDims: field('dims'), setName: field('name'), setPhone: field('phone'), setNote: field('note'),
+      setFiles: e => this.setState({ files: e.target.files ? e.target.files.length : 0 }),
+      fileLabel: s.files ? 'Dodato fotografija: ' + s.files + ' · promenite' : (isObnova ? '+ Dodajte fotografije komada' : '+ Dodajte fotografije prostora (opciono)'),
+      cityBd: bad(!s.city.trim()), nameBd: bad(!s.name.trim()), phoneBd: bad(s.phone.replace(/\D/g, '').length < 6),
+      s1Title: isObnova ? 'Recite nam nešto o komadu' : 'Recite nam nešto o prostoru',
+      dimPlaceholder: isObnova ? 'Šta je komad, npr. ormar, komoda, sto' : 'Približne dimenzije, npr. 3,6 × 2,4 m (opciono)',
+      days: this.DAYS.map((x, i) => ({ dow: DOW[x.getDay()], num: x.getDate(), mon: MON[x.getMonth()], pick: () => this.setState({ day: i, time: slotsFor(x).includes(time) ? time : '', err: '' }), ...sel(i === day) })),
+      noDay: !d,
+      times: d ? slotsFor(d).map(t => ({ label: t, pick: () => this.setState({ time: t, err: '' }), ...sel(t === time) })) : [],
+      termin: d && time ? DOW_FULL[d.getDay()] + ', ' + d.getDate() + '. ' + MON_FULL[d.getMonth()] + ' u ' + time : '',
+      firstName: s.name.trim().split(' ')[0],
+    };
+  }
+}
+</script>
+</body>
+</html>

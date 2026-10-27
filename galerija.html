@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Galerija radova · Eucalyptus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<script src="./image-slot.js"></script>
+<style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#F4EEE4;color:#2A211A;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{opacity:.75}</style>
+</helmet>
+<div data-screen-label="Galerija" style="position:relative;background:#F4EEE4;color:#2A211A;font-family:'Hanken Grotesk',sans-serif">
+  <div style="position:sticky;top:calc(100vh - 84px);height:0;z-index:30;display:flex;justify-content:flex-end;padding:0 20px">
+    <div style="display:flex;gap:6px;background:#2A211A;border-radius:999px;padding:6px;box-shadow:0 8px 24px rgba(42,33,26,.25);font-size:14px;font-weight:500">
+      <a href="viber://chat?number=%2B38134000000" style="display:flex;align-items:center;gap:8px;background:#3A2E25;color:#F4EEE4;border-radius:999px;padding:11px 16px"><span style="width:18px;height:18px;flex:none;background:#9B8AFB;-webkit-mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/viber.svg) center/contain no-repeat;mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/viber.svg) center/contain no-repeat"></span>Viber</a>
+      <a href="https://wa.me/38134000000" target="_blank" style="display:flex;align-items:center;gap:8px;background:#3A2E25;color:#F4EEE4;border-radius:999px;padding:11px 16px"><span style="width:18px;height:18px;flex:none;background:#3DDC84;-webkit-mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/whatsapp.svg) center/contain no-repeat;mask:url(https://cdn.jsdelivr.net/npm/simple-icons@11/icons/whatsapp.svg) center/contain no-repeat"></span>WhatsApp</a>
+    </div>
+  </div>
+  <dc-import name="header" style="position:sticky;top:0;z-index:40" active="galerija" book="{{ bookT }}" hint-size="100%,88px"></dc-import>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,4.6vw,56px) 0;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;gap:20px">
+      <h1 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-.03em">Galerija radova</h1>
+      <p style="margin:0;font-size:17px;line-height:1.55;color:#4E4034;max-width:820px">Deo onoga što smo napravili za domove, hotele i restorane u Kragujevcu.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(42,33,26,.18);border-bottom:1px solid rgba(42,33,26,.18);padding:16px 0">
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="7"><button onClick="{{ f.pick }}" style="padding:10px 16px;border-radius:999px;cursor:pointer;font:500 15px 'Hanken Grotesk',sans-serif;min-height:44px;background:{{ f.bg }};color:{{ f.fg }};border:1px solid {{ f.bd }}">{{ f.label }}</button></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:32px clamp(20px,4.6vw,56px) 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:32px 20px">
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+        <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+          <div style="aspect-ratio:3/2">
+            <sc-if value="{{ it.src }}" hint-placeholder-val="{{ true }}"><img src="{{ it.src }}" alt="{{ it.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:4px;display:block"></sc-if>
+            <sc-if value="{{ it.noSrc }}" hint-placeholder-val="{{ false }}"><image-slot id="gal-{{ it.id }}" shape="rounded" radius="4" placeholder="{{ it.title }}"></image-slot></sc-if>
+          </div>
+          <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="font-weight:600">{{ it.title }}</span><span style="color:#6B5A4A;flex:none">{{ it.cat }}</span></figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="margin-top:clamp(72px,10vw,120px);background:#3A2819;color:#EFE8DC">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,96px) clamp(20px,4.6vw,56px);display:flex;flex-wrap:wrap;gap:clamp(32px,4.5vw,56px);align-items:center">
+      <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:20px">
+        <span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#D9BE98;font-weight:600">Pre i posle</span>
+        <sc-if value="{{ baKomoda }}" hint-placeholder-val="{{ false }}">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(38px,4.6vw,54px);line-height:1.02;letter-spacing:-.02em">Isti prostor, <em>nova priča.</em></h2>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#E3D6C4">Povucite klizač i uporedite stanje pre i posle našeg rada.</p>
+        </sc-if>
+        <sc-if value="{{ baProzor }}" hint-placeholder-val="{{ true }}">
+          <h2 style="margin:0;font-family:'Newsreader',serif;font-weight:400;font-size:clamp(38px,4.6vw,54px);line-height:1.02;letter-spacing:-.02em">Stari prozor, <em>novi sjaj.</em></h2>
+          <p lang="hr" style="margin:0;font-size:17px;line-height:1.55;color:#E3D6C4;text-align:justify;hyphens:auto;-webkit-hyphens:auto">Isti hrastov okvir, bez zamene. Skinuli smo ispucali premaz, izbrusili drvo i zaštitili ga uljem. Prozor je ponovo topao i otporan na vremenske uslove. Povucite klizač i uporedite.</p>
+        </sc-if>
+      </div>
+      <div ref="{{ baRef }}" style="flex:2 1 460px;position:relative;aspect-ratio:3/2;border-radius:4px;overflow:hidden;user-select:none">
+        <sc-if value="{{ baKomoda }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0"><img src="assets/ormar-posle.jpg" alt="Orahov ormar posle obnove" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="position:absolute;inset:0;clip-path:{{ baClip }}"><img src="assets/ormar-pre.jpg" alt="Orahov ormar pre obnove" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </sc-if>
+        <sc-if value="{{ baProzor }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0"><img src="assets/prozor-posle.jpg" alt="Prozor od hrasta posle obnove" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="position:absolute;inset:0;clip-path:{{ baClip }}"><img src="assets/prozor-pre.jpg" alt="Drveni prozor pre obnove" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </sc-if>
+        <span style="position:absolute;top:16px;left:16px;background:#F4EEE4;color:#2A211A;font-size:12px;font-weight:600;letter-spacing:.08em;padding:6px 10px;border-radius:999px;pointer-events:none">PRE</span>
+        <span style="position:absolute;top:16px;right:16px;background:#F4EEE4;color:#2A211A;font-size:12px;font-weight:600;letter-spacing:.08em;padding:6px 10px;border-radius:999px;pointer-events:none">POSLE</span>
+        <div onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" style="position:absolute;top:0;bottom:0;left:{{ baPos }};width:48px;transform:translateX(-50%);cursor:ew-resize;touch-action:none;display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;top:0;bottom:0;left:23px;width:2px;background:#F4EEE4"></div>
+          <div style="position:relative;width:44px;height:44px;border-radius:50%;background:#F4EEE4;color:#2A211A;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 10px rgba(0,0,0,.3)">‹ ›</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="footer" book="{{ bookT }}" hint-size="100%,760px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CATS = ['Sve', 'Kuhinje', 'Ormari', 'Vrata', 'Kreveti', 'Prozori', 'Obnova', 'Poslovni prostori'];
+const ITEMS = [
+  { id: 'k1', cat: 'Kuhinje', title: 'Kuhinja sa ostrvom · hrast', src: 'slike/rad-kuhinja-hrast.jpg' },
+  { id: 'o1', cat: 'Ormari', title: 'Dvokrilni ormar · jasen', src: 'slike/rad-ormar-jasen.jpg' },
+  { id: 'k2', cat: 'Kuhinje', title: 'Ugaona kuhinja · orah', src: 'slike/rad-kuhinja-orah-l.jpg' },
+  { id: 'v1', cat: 'Vrata', title: 'Ulazna vrata · hrast', src: 'slike/rad-vrata-hrast.jpg' },
+  { id: 'b1', cat: 'Obnova', title: 'Obnovljena komoda · orah', src: 'slike/sr-obnova.jpg' },
+  { id: 'k3', cat: 'Kuhinje', title: 'Moderna kuhinja · hrast i maslinasta', src: 'assets/kuhinja-moderna.jpg' },
+  { id: 'kr1', cat: 'Kreveti', title: 'Bračni krevet · hrast', src: 'slike/sr-krevet.jpg' },
+  { id: 'pr1', cat: 'Prozori', title: 'Drveni prozori · hrast', src: 'slike/sr-prozor.jpg' },
+  { id: 'k4', cat: 'Kuhinje', title: 'Klasična kuhinja · hrast', src: 'assets/kuhinja-klasicna.jpg' },
+  { id: 'o2', cat: 'Ormari', title: 'Garderober · hrast', src: 'slike/sr-ormar.jpg' },
+  { id: 'k5', cat: 'Kuhinje', title: 'Kuhinja sa ostrvom · orah', src: 'slike/kuhinja-orah.jpg' },
+  { id: 'v2', cat: 'Vrata', title: 'Unutrašnja vrata · orah', src: 'slike/sr-vrata.jpg' },
+  { id: 'k6', cat: 'Kuhinje', title: 'Ravna kuhinja · hrast', src: 'assets/kuhinja-ravna.jpg' },
+  { id: 'k7', cat: 'Kuhinje', title: 'Ugaona kuhinja · orah i kamen', src: 'assets/kuhinja-ugaona.jpg' },
+  { id: 'k8', cat: 'Kuhinje', title: 'Kuhinja u obliku slova U · hrast', src: 'assets/kuhinja-u.jpg' },
+  { id: 'k9', cat: 'Kuhinje', title: 'Kuhinja sa orahovim ostrvom', src: 'assets/kuhinja-ostrvo.jpg' },
+  { id: 'k10', cat: 'Kuhinje', title: 'Kuhinja od oraha i kamena', src: 'assets/kuhinje-hero.jpg' },
+  { id: 'k11', cat: 'Kuhinje', title: 'Kuhinja od hrasta i kamena', src: 'slike/rad-kuhinja-hrast-kamen.jpg' },
+  { id: 'k12', cat: 'Kuhinje', title: 'Kuhinja od oraha · ostrvo', src: 'slike/sr-kuhinja.jpg' },
+  { id: 'k13', cat: 'Kuhinje', title: 'Prozračna kuhinja · svetli hrast', src: 'assets/k-g1.jpg' },
+  { id: 'k14', cat: 'Kuhinje', title: 'Kuhinja · orah i kamen', src: 'assets/k-g2.jpg' },
+  { id: 'k15', cat: 'Kuhinje', title: 'Grafitna kuhinja · hrast', src: 'assets/k-g3.jpg' },
+  { id: 'k16', cat: 'Kuhinje', title: 'L-kuhinja · hrast i kamen', src: 'assets/k-g4.jpg' },
+  { id: 'k17', cat: 'Kuhinje', title: 'Paralelna kuhinja · orah', src: 'assets/k-g5.jpg' },
+  { id: 'k18', cat: 'Kuhinje', title: 'Maslinasta kuhinja · hrast', src: 'assets/k-g6.jpg' },
+  { id: 'k19', cat: 'Kuhinje', title: 'Detalj fioke · orah i hrast', src: 'assets/kuhinja-detalj.jpg' },
+  { id: 'kr2', cat: 'Kreveti', title: 'Dečiji krevet · hrast', src: 'assets/krevet-decji.jpg' },
+  { id: 'pr2', cat: 'Prozori', title: 'Prozori na kući · hrast', src: 'assets/prozori-kuca.jpg' },
+  { id: 'b2', cat: 'Obnova', title: 'Stari ormar, obnovljen · orah', src: 'assets/ormar-obnovljen.jpg' },
+  { id: 'p1', cat: 'Poslovni prostori', title: 'Restoran · enterijer', src: 'assets/restoran.jpg' },
+  { id: 'p2', cat: 'Poslovni prostori', title: 'Hotel · predvorje od oraha', src: 'assets/hotel.jpg' },
+];
+const BOOK = { Kuhinje: 'Kuhinja', Prozori: 'Prozori', Kreveti: 'Krevet', Ormari: 'Ormar', Vrata: 'Vrata', Obnova: 'Obnova', 'Poslovni prostori': 'Poslovni' };
+class Component extends DCLogic {
+  state = { f: 'Sve', ba: 50 };
+  drag = false;
+  baRef = el => { this.baEl = el; };
+  componentDidMount() {
+    try { const f = decodeURIComponent(window.location.hash.slice(1)); if (f && CATS.includes(f)) this.setState({ f }); } catch (e) {}
+  }
+  renderVals() {
+    const { f } = this.state;
+    const bookT = BOOK[f] || '';
+    const items = (f === 'Sve' ? ITEMS : ITEMS.filter(i => i.cat === f)).map(i => ({ ...i, noSrc: !i.src }));
+    const n = items.length;
+    const p = this.state.ba;
+    return {
+      bookT,
+      filters: CATS.map(c => ({ label: c, pick: () => this.setState({ f: c }), bg: c === f ? '#2A211A' : 'transparent', fg: c === f ? '#F4EEE4' : '#2A211A', bd: c === f ? '#2A211A' : 'rgba(42,33,26,.3)' })),
+      items,
+      countLabel: n + (n === 1 ? ' rad' : n < 5 ? ' rada' : ' radova'),
+      baKomoda: f === 'Obnova',
+      baProzor: f !== 'Obnova',
+      baRef: this.baRef,
+      baPos: p + '%',
+      baClip: `inset(0 ${100 - p}% 0 0)`,
+      baDown: e => { this.drag = true; e.currentTarget.setPointerCapture(e.pointerId); e.preventDefault(); },
+      baMove: e => {
+        if (!this.drag || !this.baEl) return;
+        const r = this.baEl.getBoundingClientRect();
+        this.setState({ ba: Math.max(3, Math.min(97, ((e.clientX - r.left) / r.width) * 100)) });
+      },
+      baUp: () => { this.drag = false; },
+    };
+  }
+}
+</script>
+</body>
+</html>
